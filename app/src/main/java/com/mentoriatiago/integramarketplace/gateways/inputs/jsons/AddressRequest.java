@@ -1,4 +1,4 @@
-package com.mentoriatiago.integramarketplace.gateways.jsons;
+package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.Address;
 import lombok.Getter;

@@ -3,15 +3,16 @@ package com.mentoriatiago.integramarketplace.domains;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @Setter
 public class LastModifiedDate {
-    private Date modifiedDate = new Date();
+    private String modifiedDate;
 
-    @Override
-    public String toString() {
-        return modifiedDate.toString();
+    public String lastModifiedDate() {
+        modifiedDate = LocalDateTime.now().toString();
+        return modifiedDate;
     }
 }

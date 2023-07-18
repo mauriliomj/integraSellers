@@ -1,11 +1,10 @@
-package com.mentoriatiago.integramarketplace.gateways.jsons;
+package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.ResponseEntity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package com.mentoriatiago.integramarketplace.repositories;
+package com.mentoriatiago.integramarketplace.gateways.outputs.repositories;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,5 @@ public interface SellersRepository extends PagingAndSortingRepository<Seller, St
     public Optional<Seller> findById(String sellerId);
 
     public boolean existsById(String sellerId);
-
-
 
 }

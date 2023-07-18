@@ -1,4 +1,4 @@
-package com.mentoriatiago.integramarketplace.gateways.jsons;
+package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.Address;
 import com.mentoriatiago.integramarketplace.domains.Contact;
@@ -6,8 +6,6 @@ import com.mentoriatiago.integramarketplace.domains.Seller;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter

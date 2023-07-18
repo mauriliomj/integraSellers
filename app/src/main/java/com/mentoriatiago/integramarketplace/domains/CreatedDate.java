@@ -1,16 +1,13 @@
 package com.mentoriatiago.integramarketplace.domains;
-
 import lombok.Getter;
-
-import java.util.Date;
-
+import java.time.LocalDateTime;
 
 @Getter
 public class CreatedDate {
-    Date createdDate = new Date();
+    private String createdDate;
 
-    @Override
-    public String toString() {
-        return createdDate.toString();
+    public String dateTime() {
+        createdDate = LocalDateTime.now().toString();
+        return createdDate;
     }
 }

@@ -1,7 +1,6 @@
-package com.mentoriatiago.integramarketplace.gateways.jsons;
+package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.Address;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 public class AddressResponse {
 

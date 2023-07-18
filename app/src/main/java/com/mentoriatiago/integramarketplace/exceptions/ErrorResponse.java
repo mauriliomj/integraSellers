@@ -1,4 +1,4 @@
-package com.mentoriatiago.integramarketplace.exceptionsAndValidations;
+package com.mentoriatiago.integramarketplace.exceptions;
 
 import lombok.Data;
 
