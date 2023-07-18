@@ -1,7 +1,9 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.Address;
+import lombok.Data;
 
+@Data
 public class AddressResponse {
 
     private String street;

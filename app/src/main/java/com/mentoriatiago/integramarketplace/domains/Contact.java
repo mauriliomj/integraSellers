@@ -1,16 +1,12 @@
 package com.mentoriatiago.integramarketplace.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class Contact {
-    private ContactTypeEnum type;
-    private String value;
+  private ContactTypeEnum type;
+  private String value;
 
-    public Contact(ContactTypeEnum type, String value) {
-        this.type = type;
-        this.value = value;
-    }
 }

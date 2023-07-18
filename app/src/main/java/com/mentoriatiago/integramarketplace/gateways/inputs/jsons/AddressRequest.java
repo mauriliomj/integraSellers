@@ -1,11 +1,11 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.Address;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class AddressRequest {
     private String street;
     private String number;

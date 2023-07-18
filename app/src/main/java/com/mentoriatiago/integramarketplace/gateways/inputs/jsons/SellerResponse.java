@@ -1,13 +1,13 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 public class SellerResponse {
     private String sellerId;
     private String name;
