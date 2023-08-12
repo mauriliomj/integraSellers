@@ -1,11 +1,12 @@
 package com.mentoriatiago.integramarketplace.gateways.outputs.mongodb;
-
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
 import com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.documents.SellerDocument;
 import com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.repositories.SellersRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,4 +34,15 @@ public class SellerDataGatewayMongoImpl implements SellerDataGateway {
   public Boolean sellerExists(String sellerId) {
     return sellersRepository.existsById(sellerId);
   }
+
+  @Override
+  public Page<Seller> findAll(PageRequest pageable) {
+    return sellersRepository.findAll(pageable).map(SellerDocument::toDomain);
+  }
+
+  @Override
+  public boolean existsById(String sellerId) {
+    return sellersRepository.existsById(sellerId);
+  }
 }
+

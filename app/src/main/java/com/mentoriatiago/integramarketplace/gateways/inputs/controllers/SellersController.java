@@ -36,8 +36,7 @@ public class SellersController {
     @PostMapping
     @ApiOperation("Adiciona um novo seller!")
     public void addSellers(@Valid @RequestBody SellerRequest sellerRequest) {
-        Seller seller = sellerRequest.toDomain();
-        addSeller.save(seller);
+        addSeller.execute(sellerRequest.toDomain());
     }
 
     @GetMapping
@@ -52,12 +51,11 @@ public class SellersController {
     public Optional<Seller> updateSeller(@PathVariable String sellerId,
                                          @RequestBody SellerRequest updatedSeller)
             throws NotFound {
-        Seller seller = updatedSeller.toDomain();
         return updateSeller.updateSeller(sellerId, updatedSeller);
     }
 
     @GetMapping("/{sellerId}")
-    public Optional<Seller> getSeller(String sellerId){
+    public Seller getSeller(String sellerId){
         return getSellerById.getSeller(sellerId);
     }
 }

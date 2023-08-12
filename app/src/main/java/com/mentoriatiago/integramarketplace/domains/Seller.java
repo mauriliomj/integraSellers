@@ -1,8 +1,10 @@
 package com.mentoriatiago.integramarketplace.domains;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Seller {
 
     private String sellerId;
@@ -12,4 +14,5 @@ public class Seller {
     private Address address;
     private String createdDate;
     private String lastModifiedDate;
+
 }

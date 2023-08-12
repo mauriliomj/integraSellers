@@ -1,7 +1,7 @@
 package com.mentoriatiago.integramarketplace.usecases;
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import com.mentoriatiago.integramarketplace.exceptions.NotFound;
-import com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.repositories.SellersRepository;
+import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
@@ -9,12 +9,9 @@ import java.util.Optional;
 @Component
 public class GetSellerById {
     @Autowired
-    private SellersRepository sellersRepository;
-    public Optional<Seller> getSeller(String sellerId){
-        if(sellersRepository.existsById(sellerId)){
-            return sellersRepository.findById(sellerId);
-        } else{
-            throw new NotFound(sellerId+" Id não encontrado!");
-        }
+    private SellerDataGateway sellerDataGateway;
+    public Seller getSeller(String sellerId){
+        return sellerDataGateway.findById(sellerId).orElseThrow(()->new
+                NotFound("ID não encontrado!"));
     }
 }

@@ -2,8 +2,6 @@ package com.mentoriatiago.integramarketplace.usecases;
 import com.mentoriatiago.integramarketplace.domains.*;
 import com.mentoriatiago.integramarketplace.exceptions.AlreadyRegisteredException;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
-import com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.documents.SellerDocument;
-import com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.repositories.SellersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
