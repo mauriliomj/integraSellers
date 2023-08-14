@@ -4,6 +4,7 @@ import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.SellerRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,6 +18,7 @@ public class UpdateSellerTest {
     GetSellerById getSellerById;
     @Test
     public void shouldUpdateSellerById(){
+
         SellerRequest sellerRequest = new SellerRequest();
         sellerRequest.setName("Junit Test");
 
