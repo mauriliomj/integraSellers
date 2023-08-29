@@ -1,10 +1,10 @@
 package com.mentoriatiago.integramarketplace.usecases;
+
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import com.mentoriatiago.integramarketplace.exceptions.NotFound;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.util.Optional;
 
 @Component
 public class GetSellerById {

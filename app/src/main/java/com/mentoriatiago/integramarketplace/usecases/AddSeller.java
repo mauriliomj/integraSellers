@@ -1,32 +1,26 @@
 package com.mentoriatiago.integramarketplace.usecases;
-import com.mentoriatiago.integramarketplace.domains.*;
+
+import com.mentoriatiago.integramarketplace.domains.Seller;
+import com.mentoriatiago.integramarketplace.domains.SellerId;
 import com.mentoriatiago.integramarketplace.exceptions.AlreadyRegisteredException;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
-
 @Component
+@AllArgsConstructor
 public class AddSeller {
 
     private SellerDataGateway sellerDataGateway;
-
-    @Autowired
-    public AddSeller(SellerDataGateway sellerDataGateway){
-
-        this.sellerDataGateway = sellerDataGateway;
-
-    }
 
     public void execute(Seller seller) {
         if(sellerDataGateway.findByRegistrationCode(seller.getRegistrationCode()).isPresent()){
             throw new AlreadyRegisteredException("Seller já registrado!");
         } else{
             seller.setSellerId(new SellerId().selerId());
-            seller.setCreatedDate(LocalDateTime.now().toString());
-            seller.setLastModifiedDate(LocalDateTime.now().toString());
+            seller.setCreatedDate(LocalDateTime.now());
+            seller.setLastModifiedDate(LocalDateTime.now());
             sellerDataGateway.save(seller);
         }
     }

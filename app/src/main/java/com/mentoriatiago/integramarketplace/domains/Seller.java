@@ -1,6 +1,9 @@
 package com.mentoriatiago.integramarketplace.domains;
 
-import lombok.*;
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +20,7 @@ public class Seller {
     private String registrationCode;
     private Contact contact;
     private Address address;
-    private String createdDate;
-    private String lastModifiedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
 
 }

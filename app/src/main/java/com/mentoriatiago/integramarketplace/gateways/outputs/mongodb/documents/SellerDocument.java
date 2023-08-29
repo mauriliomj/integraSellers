@@ -1,6 +1,7 @@
 package com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.documents;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -19,8 +20,8 @@ public class SellerDocument {
     private String registrationCode;
     private ContactDocument contact;
     private AddressDocument address;
-    private String createdDate;
-    private String lastModifiedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
 
     public SellerDocument(Seller seller) {
         this.sellerId = seller.getSellerId();

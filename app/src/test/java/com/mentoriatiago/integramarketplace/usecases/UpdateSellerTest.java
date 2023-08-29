@@ -1,63 +1,71 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
+import static java.util.Optional.empty;
+import static org.mockito.ArgumentMatchers.anyString;
+
 import com.mentoriatiago.integramarketplace.domains.Seller;
-import com.mentoriatiago.integramarketplace.domains.SellerId;
 import com.mentoriatiago.integramarketplace.exceptions.NotFound;
-import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.ContactRequest;
-import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.SellerRequest;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class UpdateSellerTest {
+
     @InjectMocks
     private UpdateSeller updateSeller;
+
     @Mock
     private SellerDataGateway sellerDataGateway;
+
     @Test
     public void deveEncontrarESalvarAlteracoesDeUmSellerPeloId(){
-        String sellerId = "test";
-        Seller seller = mock(Seller.class);
-        SellerRequest sellerRequest = new SellerRequest();
-        sellerRequest.setContact(new ContactRequest());
+        //dado - given
+        Seller seller = mockSeller();
 
-        Mockito.when(sellerDataGateway.findById(sellerId))
-                .thenReturn(Optional.of(seller));
+        Mockito.when(sellerDataGateway.findById(seller.getSellerId()))
+            .thenReturn(Optional.of(seller));
 
-        Optional<Seller> optionalSeller = updateSeller
-                .updateSeller(sellerId,sellerRequest);
+        //quando - when
+        Seller savedSeller = updateSeller
+            .updateSeller(seller.getSellerId(), seller);
 
-        Assertions.assertTrue(optionalSeller.isPresent());
-        Assertions.assertEquals(seller, optionalSeller.get(),"sellers iguais");
-        Mockito.verify(sellerDataGateway).findById(sellerId);
-        Mockito.verify(sellerDataGateway).save(any(Seller.class));
+        //então - then
+        Assertions.assertNotNull(savedSeller);
+        Assertions.assertEquals(seller, savedSeller);
+        Mockito.verify(sellerDataGateway).findById(seller.getSellerId());
+        Mockito.verify(sellerDataGateway).save(seller);
      }
 
     @Test
     public void deveLancarNotFoundSeNaoEncontrarOSeller(){
-        String sellerId = "test";
-        SellerRequest sellerRequest = new SellerRequest();
-        sellerRequest.setContact(new ContactRequest());
+        //given
+        Mockito.when(sellerDataGateway.findById(anyString())).thenReturn(empty());
 
-        Mockito.when(sellerDataGateway.findById(sellerId))
-                .thenReturn(Optional.empty());
-
+        //when
         Assertions.assertThrows(NotFound.class,
-                ()->updateSeller.updateSeller(sellerId,sellerRequest),
+                ()->updateSeller.updateSeller("123",new Seller()),
                 "Deve Lancar exception NotFound!");
 
-        Mockito.verify(sellerDataGateway).findById(sellerId);
+        //then
+        Mockito.verify(sellerDataGateway).findById("123");
     }
+
+    private Seller mockSeller() {
+        Seller seller = new Seller();
+        seller.setSellerId("1");
+        seller.setName("Seller de Teste");
+        seller.setRegistrationCode("36.506.556/0001-00");
+        seller.setCreatedDate(LocalDateTime.now());
+        seller.setLastModifiedDate(LocalDateTime.now());
+        return seller;
+    }
+
 }

@@ -1,11 +1,10 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
-import com.mentoriatiago.integramarketplace.domains.Address;
-import com.mentoriatiago.integramarketplace.domains.Contact;
+import static java.util.Optional.ofNullable;
+
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 public class SellerRequest {
@@ -21,8 +20,8 @@ public class SellerRequest {
     Seller seller = new Seller();
     seller.setName(name);
     seller.setRegistrationCode(registrationCode);
-    seller.setContact(contact.toDomain());
-    seller.setAddress(address.toDomain());
-    return seller;
+    seller.setContact(ofNullable(contact).map(ContactRequest::toDomain).orElse(null));
+    seller.setAddress(ofNullable(address).map(AddressRequest::toDomain).orElse(null));
+    return new Seller();
   }
 }

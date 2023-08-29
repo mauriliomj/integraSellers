@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GetAllSellers {
+
     private SellerDataGateway sellerDataGateway;
+
     @Autowired
     public GetAllSellers(SellerDataGateway sellerDataGateway){
         this.sellerDataGateway = sellerDataGateway;
