@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    private static final String BASE_PACKAGE = "com.mentoriatiago.integramarketplace.gateways";
+    private static final String BASE_PACKAGE = "com.mentoriatiago.integramarketplace.gateways.inputs.controllers";
 
     @Bean
     public Docket internal() {

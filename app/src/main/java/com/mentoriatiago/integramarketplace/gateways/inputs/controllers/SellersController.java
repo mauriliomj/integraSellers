@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 
@@ -35,7 +35,9 @@ public class SellersController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @ApiOperation("Adiciona um novo seller!")
-    public void addSellers(@Valid @RequestBody SellerRequest sellerRequest) {
+    @NotNull
+    @Validated
+    public void addSellers(@RequestBody SellerRequest sellerRequest) {
         addSeller.execute(sellerRequest.toDomain());
     }
 
@@ -55,6 +57,7 @@ public class SellersController {
     }
 
     @GetMapping("/{sellerId}")
+    @ApiOperation("Busca um Seller pelo Id.")
     public Seller getSeller(String sellerId){
         return getSellerById.getSeller(sellerId);
     }

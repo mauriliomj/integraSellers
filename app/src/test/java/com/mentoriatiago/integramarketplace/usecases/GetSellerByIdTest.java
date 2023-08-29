@@ -1,46 +1,47 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
+import com.mentoriatiago.integramarketplace.domains.SellerId;
+import com.mentoriatiago.integramarketplace.exceptions.NotFound;
+import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
+import com.sun.source.tree.ModuleTree;
+import net.bytebuddy.implementation.bytecode.Throw;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Optional;
 
-// Id a ser consultado "1690151525280_1"
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
-public class GetSellerByIdTest {
-
-    @Autowired
-    GetSellerById getSellerById;
-
+class GetSellerByIdTest {
+    @InjectMocks
+    private GetSellerById getSellerById;
+    @Mock
+    private SellerDataGateway sellerDataGateway;
     @Test
-    public void shouldGetSellerById(){
-        Seller sellerTest = getSellerById.getSeller("1690151525280_1");
-
-        String name = "josue";
-        String registrationCode = "josueteste";
-        String contact = "string";
-        String street = "string";
-        String number = "string";
-        String zipcode = "string";
-        String city = "string";
-        String state = "string";
-        String country = "string";
-        String createdDate = "2023-07-23T19:32:05.467391959";
-        String lastModifiedDate = "2023-07-23T19:32:05.468277123";
-
-        assertEquals(name, sellerTest.getName());
-        assertEquals(registrationCode, sellerTest.getRegistrationCode());
-        assertEquals(contact, sellerTest.getContact().getValue());
-        assertEquals(street, sellerTest.getAddress().getStreet());
-        assertEquals(number, sellerTest.getAddress().getNumber());
-        assertEquals(zipcode, sellerTest.getAddress().getZipcode());
-        assertEquals(city, sellerTest.getAddress().getCity());
-        assertEquals(state, sellerTest.getAddress().getState());
-        assertEquals(country, sellerTest.getAddress().getCountry());
-        assertEquals(createdDate, sellerTest.getCreatedDate());
-        assertEquals(lastModifiedDate, sellerTest.getLastModifiedDate());
+    public void deveriaMostrarUmSellerPeloId(){
+        String sellerId = "Id Teste";
+        Seller seller = mock(Seller.class);
+        Mockito.when(sellerDataGateway.findById(sellerId))
+                .thenReturn(Optional.of(seller));
+        getSellerById.getSeller(sellerId);
+        Mockito.verify(sellerDataGateway).findById(sellerId);
     }
+    @Test
+    public void deveLancarExceptionSeNaoEncontrarUmSeller(){
+        String sellerId = "test";
 
+        Mockito.when(sellerDataGateway.findById(sellerId)).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(NotFound.class, ()-> getSellerById.getSeller(sellerId));
+
+        Mockito.verify(sellerDataGateway).findById(sellerId);
+    }
 }

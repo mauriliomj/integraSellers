@@ -1,30 +1,40 @@
 package com.mentoriatiago.integramarketplace.usecases;
-import com.mentoriatiago.integramarketplace.domains.*;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.*;
 
-/* Perguntar ao Tiago se é válido criar um novo repositorio ou o junit
-apaga os objetos gerados */
+import com.mentoriatiago.integramarketplace.domains.Seller;
+import com.mentoriatiago.integramarketplace.exceptions.AlreadyRegisteredException;
+import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class AddSellerTest {
-    @Autowired
-    AddSeller addSeller;
-
+    @InjectMocks
+    private AddSeller addSeller;
+    @Mock
+    private SellerDataGateway sellerDataGateway;
     @Test
-    public void shouldSaveASeller(){
-
-        Seller seller = new Seller("sellerIdTestJunit1", "name",
-                "registrationCode1",
-                new Contact(ContactTypeEnum.EMAIL, "maurilio@maurilio"),
-                new Address(),"01/01/2021", "01/02/2021");
-
+    public void deveSalvarUmSeller(){
+        Seller seller = new Seller();
+        Mockito.when(sellerDataGateway
+                .findByRegistrationCode(seller.getRegistrationCode()))
+                .thenReturn(Optional.empty());
         addSeller.execute(seller);
-
-        Seller sellerSaved = new GetSellerById().getSeller("sellerIdTestJunit1");
-
-        assertEquals("sellerIdTestJunit1", sellerSaved);
+        Mockito.verify(sellerDataGateway).save(seller);
     }
+    @Test
+    public void deveLancarExceptionEmSellerRepetido(){
+        Mockito.when(sellerDataGateway.findByRegistrationCode(Mockito.any()))
+                .thenReturn(Optional.of(new Seller()));
+
+        Assertions.assertThrows(AlreadyRegisteredException.class, ()->addSeller.execute(new Seller()));
+    }
+  
 }

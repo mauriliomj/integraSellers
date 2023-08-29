@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @Component
 public class UpdateSeller {
-    @Autowired
     private SellerDataGateway sellerDataGateway;
+    @Autowired
+    public UpdateSeller(SellerDataGateway sellerDataGateway){
+        this.sellerDataGateway = sellerDataGateway;
+    }
     public Optional<Seller> updateSeller(String sellerId, SellerRequest updatedSeller){
         Optional<Seller> existingSeller = sellerDataGateway.findById(sellerId);
         Seller seller = updatedSeller.toDomain();
@@ -23,7 +26,7 @@ public class UpdateSeller {
             seller.setLastModifiedDate(LocalDateTime.now().toString());
             sellerDataGateway.save(seller);
 
-            return sellerDataGateway.findById(sellerId);
+            return existingSeller;
 
         } else {
             throw new NotFound("Seller não encontrado!");

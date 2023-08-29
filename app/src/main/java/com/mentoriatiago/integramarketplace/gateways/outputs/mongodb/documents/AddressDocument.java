@@ -24,7 +24,7 @@ public class AddressDocument {
     }
 
     public Address toDomain() {
-        Address address = new Address();
+        Address address = new Address(street,number,zipcode,city,state,country);
         address.setStreet(this.street);
         address.setNumber(this.number);
         address.setZipcode(this.zipcode);

@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GetAllSellers {
-    @Autowired
     private SellerDataGateway sellerDataGateway;
+    @Autowired
+    public GetAllSellers(SellerDataGateway sellerDataGateway){
+        this.sellerDataGateway = sellerDataGateway;
+    }
 
     public Page<Seller> getSellers(int pageNumber, int pageSize){
         PageRequest pageable = PageRequest.of(pageNumber, pageSize);
