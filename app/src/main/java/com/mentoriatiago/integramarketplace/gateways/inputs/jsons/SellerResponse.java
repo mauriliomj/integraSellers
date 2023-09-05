@@ -1,13 +1,12 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
-import com.mentoriatiago.integramarketplace.domains.Address;
-import com.mentoriatiago.integramarketplace.domains.Contact;
-import com.mentoriatiago.integramarketplace.domains.Seller;
-import java.time.LocalDateTime;
+import com.mentoriatiago.integramarketplace.domains.*;
 import lombok.Data;
+import org.joda.time.LocalDateTime;
 
 @Data
 public class SellerResponse {
+
     private String sellerId;
     private String name;
     private String registrationCode;
@@ -17,6 +16,7 @@ public class SellerResponse {
     private LocalDateTime lastModifiedDate;
 
     public SellerResponse(Seller seller) {
+
         this.sellerId = seller.getSellerId();
         this.name = seller.getName();
         this.registrationCode = seller.getRegistrationCode();
@@ -24,5 +24,6 @@ public class SellerResponse {
         this.address = seller.getAddress();
         this.createdDate = seller.getCreatedDate();
         this.lastModifiedDate = seller.getLastModifiedDate();
+
     }
 }

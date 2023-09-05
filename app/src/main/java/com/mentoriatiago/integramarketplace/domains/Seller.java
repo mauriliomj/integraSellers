@@ -1,9 +1,7 @@
 package com.mentoriatiago.integramarketplace.domains;
 
-import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.joda.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +11,7 @@ public class Seller {
     public Seller(Contact contact, Address address){
         this.address = address;
         this.contact = contact;
+
     }
 
     private String sellerId;

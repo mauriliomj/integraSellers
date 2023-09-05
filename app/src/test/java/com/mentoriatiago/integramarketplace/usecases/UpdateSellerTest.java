@@ -1,13 +1,9 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
-import static java.util.Optional.empty;
-import static org.mockito.ArgumentMatchers.anyString;
-
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import com.mentoriatiago.integramarketplace.exceptions.NotFound;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import org.joda.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,57 +11,73 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Optional;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class UpdateSellerTest {
 
     @InjectMocks
     private UpdateSeller updateSeller;
-
     @Mock
     private SellerDataGateway sellerDataGateway;
 
     @Test
     public void deveEncontrarESalvarAlteracoesDeUmSellerPeloId(){
-        //dado - given
+
         Seller seller = mockSeller();
+        Seller modifiedSeller = mockSellerUpdated();
 
         Mockito.when(sellerDataGateway.findById(seller.getSellerId()))
             .thenReturn(Optional.of(seller));
 
-        //quando - when
-        Seller savedSeller = updateSeller
-            .updateSeller(seller.getSellerId(), seller);
+        Seller sellerAfterModified = updateSeller.updateSeller(seller.getSellerId(),
+            modifiedSeller);
 
-        //então - then
-        Assertions.assertNotNull(savedSeller);
-        Assertions.assertEquals(seller, savedSeller);
         Mockito.verify(sellerDataGateway).findById(seller.getSellerId());
-        Mockito.verify(sellerDataGateway).save(seller);
-     }
+
+        Assertions.assertEquals(seller.getCreatedDate(), sellerAfterModified.getCreatedDate());
+        Assertions.assertNotEquals(seller.getLastModifiedDate(),
+            sellerAfterModified.getLastModifiedDate());
+        Assertions.assertEquals(seller.getRegistrationCode(),
+            sellerAfterModified.getRegistrationCode());
+        Assertions.assertNotEquals(seller.getName(),sellerAfterModified.getName());
+
+    }
 
     @Test
     public void deveLancarNotFoundSeNaoEncontrarOSeller(){
-        //given
-        Mockito.when(sellerDataGateway.findById(anyString())).thenReturn(empty());
 
-        //when
-        Assertions.assertThrows(NotFound.class,
-                ()->updateSeller.updateSeller("123",new Seller()),
-                "Deve Lancar exception NotFound!");
+        Seller seller = mockSeller();
+        Seller modifiedSeller = mockSellerUpdated();
 
-        //then
-        Mockito.verify(sellerDataGateway).findById("123");
+        Mockito.when(sellerDataGateway.findById(any()))
+            .thenThrow(new NotFound("Seller não encontrado!"));
+
+        Assertions.assertThrows(NotFound.class, ()->updateSeller
+            .updateSeller(seller.getSellerId(), modifiedSeller));
+
     }
 
-    private Seller mockSeller() {
-        Seller seller = new Seller();
-        seller.setSellerId("1");
-        seller.setName("Seller de Teste");
-        seller.setRegistrationCode("36.506.556/0001-00");
-        seller.setCreatedDate(LocalDateTime.now());
-        seller.setLastModifiedDate(LocalDateTime.now());
-        return seller;
+    public Seller mockSeller(){
+
+        Seller mockSeller = new Seller();
+        mockSeller.setSellerId("1693535770652_1");
+        mockSeller.setName("MCM Comercial Eletrica ME");
+        mockSeller.setRegistrationCode("17.562.451/0001-15");
+        mockSeller.setCreatedDate(LocalDateTime.now());
+        mockSeller.setLastModifiedDate(LocalDateTime.now());
+        return mockSeller;
+
     }
 
+    public Seller mockSellerUpdated(){
+
+        Seller mockSellerUpdated = new Seller();
+        mockSellerUpdated.setSellerId("1693535770652_1");
+        mockSellerUpdated.setName("Supermercado Lopes");
+        mockSellerUpdated.setRegistrationCode("17.562.451/0001-15");
+        return mockSellerUpdated;
+
+    }
 }

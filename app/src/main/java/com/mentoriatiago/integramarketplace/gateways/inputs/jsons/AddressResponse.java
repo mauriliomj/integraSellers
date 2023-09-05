@@ -14,12 +14,13 @@ public class AddressResponse {
     private String country;
 
     public AddressResponse(Address address){
+
         this.street = address.getStreet();
         this.number = address.getNumber();
         this.zipcode = address.getZipcode();
         this.city = address.getCity();
         this.state = address.getState();
         this.country = address.getCountry();
-    }
 
+    }
 }
