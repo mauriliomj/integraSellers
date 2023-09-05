@@ -29,21 +29,21 @@ class UpdateSellerTest {
         Seller modifiedSeller = mockSellerUpdated();
 
         Mockito.when(sellerDataGateway.findById(seller.getSellerId()))
-                .thenReturn(Optional.of(seller));
+            .thenReturn(Optional.of(seller));
 
         Seller sellerAfterModified = updateSeller.updateSeller(seller.getSellerId(),
-                modifiedSeller);
+            modifiedSeller);
 
         Mockito.verify(sellerDataGateway).findById(seller.getSellerId());
 
         Assertions.assertEquals(seller.getCreatedDate(), sellerAfterModified.getCreatedDate());
         Assertions.assertNotEquals(seller.getLastModifiedDate(),
-                sellerAfterModified.getLastModifiedDate());
+            sellerAfterModified.getLastModifiedDate());
         Assertions.assertEquals(seller.getRegistrationCode(),
-                sellerAfterModified.getRegistrationCode());
+            sellerAfterModified.getRegistrationCode());
         Assertions.assertNotEquals(seller.getName(),sellerAfterModified.getName());
 
-     }
+    }
 
     @Test
     public void deveLancarNotFoundSeNaoEncontrarOSeller(){
@@ -52,10 +52,10 @@ class UpdateSellerTest {
         Seller modifiedSeller = mockSellerUpdated();
 
         Mockito.when(sellerDataGateway.findById(any()))
-                .thenThrow(new NotFound("Seller não encontrado!"));
+            .thenThrow(new NotFound("Seller não encontrado!"));
 
         Assertions.assertThrows(NotFound.class, ()->updateSeller
-                .updateSeller(seller.getSellerId(), modifiedSeller));
+            .updateSeller(seller.getSellerId(), modifiedSeller));
 
     }
 

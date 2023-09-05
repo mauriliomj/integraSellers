@@ -1,6 +1,7 @@
 package com.mentoriatiago.integramarketplace.gateways.outputs.mongodb.documents;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;

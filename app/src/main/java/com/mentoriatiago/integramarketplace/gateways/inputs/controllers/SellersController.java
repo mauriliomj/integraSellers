@@ -52,7 +52,7 @@ public class SellersController {
     @ApiOperation("Atualiza/modifica os sellers cadastrados.")
     public Seller updateSeller(@PathVariable String sellerId,
                                @RequestBody SellerRequest updatedSeller)
-            throws NotFound {
+        throws NotFound {
 
         return updateSeller.updateSeller(sellerId, updatedSeller.toDomain());
 
