@@ -1,8 +1,8 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.*;
+import java.time.LocalDateTime;
 import lombok.Data;
-import org.joda.time.LocalDateTime;
 
 @Data
 public class SellerResponse {

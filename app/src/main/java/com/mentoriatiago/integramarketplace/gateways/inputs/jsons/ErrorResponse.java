@@ -1,4 +1,4 @@
-package com.mentoriatiago.integramarketplace.exceptions;
+package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import lombok.Data;
 import java.util.List;

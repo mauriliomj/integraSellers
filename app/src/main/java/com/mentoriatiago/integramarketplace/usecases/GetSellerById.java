@@ -1,7 +1,7 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
-import com.mentoriatiago.integramarketplace.exceptions.NotFound;
+import com.mentoriatiago.integramarketplace.exceptions.NotFoundException;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class GetSellerById {
     public Seller getSeller(String sellerId){
 
         return sellerDataGateway.findById(sellerId).orElseThrow(()->new
-                NotFound("ID não encontrado!"));
+            NotFoundException("ID não encontrado!"));
 
     }
 }

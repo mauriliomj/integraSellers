@@ -1,11 +1,11 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
-import com.mentoriatiago.integramarketplace.exceptions.NotFound;
+import com.mentoriatiago.integramarketplace.exceptions.NotFoundException;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.joda.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -29,7 +29,7 @@ public class UpdateSeller {
 
         } else {
 
-            throw new NotFound("Seller não encontrado!");
+            throw new NotFoundException("Seller não encontrado!");
 
         }
     }
