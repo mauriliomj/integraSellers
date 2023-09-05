@@ -1,5 +1,7 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
+import static org.mockito.Mockito.mock;
+
 import com.mentoriatiago.integramarketplace.domains.Seller;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
 import org.junit.jupiter.api.Assertions;
@@ -9,10 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class GetAllSellersTest {

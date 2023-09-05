@@ -1,7 +1,7 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.controllers;
 
 import com.mentoriatiago.integramarketplace.domains.*;
-import com.mentoriatiago.integramarketplace.exceptions.NotFound;
+import com.mentoriatiago.integramarketplace.exceptions.NotFoundException;
 import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.SellerRequest;
 import com.mentoriatiago.integramarketplace.usecases.AddSeller;
 import com.mentoriatiago.integramarketplace.usecases.GetAllSellers;
@@ -52,7 +52,7 @@ public class SellersController {
     @ApiOperation("Atualiza/modifica os sellers cadastrados.")
     public Seller updateSeller(@PathVariable String sellerId,
                                @RequestBody SellerRequest updatedSeller)
-        throws NotFound {
+        throws NotFoundException {
 
         return updateSeller.updateSeller(sellerId, updatedSeller.toDomain());
 

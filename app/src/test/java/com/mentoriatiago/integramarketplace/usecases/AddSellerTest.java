@@ -1,9 +1,9 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
-import com.mentoriatiago.integramarketplace.exceptions.AlreadyRegistered;
+import com.mentoriatiago.integramarketplace.exceptions.AlreadyRegisteredException;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,9 +43,9 @@ public class AddSellerTest {
     public void deveLancarExceptionEmSellerRepetido(){
 
         Mockito.when(sellerDataGateway.findByRegistrationCode(any()))
-                .thenThrow(new AlreadyRegistered("Seller já registrado!"));
+                .thenThrow(new AlreadyRegisteredException("Seller já registrado!"));
 
-        Assertions.assertThrows(AlreadyRegistered.class, ()->addSeller.execute(mockSeller()));
+        Assertions.assertThrows(AlreadyRegisteredException.class, ()->addSeller.execute(mockSeller()));
 
     }
 

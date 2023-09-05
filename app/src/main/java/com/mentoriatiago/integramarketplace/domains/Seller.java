@@ -1,7 +1,7 @@
 package com.mentoriatiago.integramarketplace.domains;
 
+import java.time.LocalDateTime;
 import lombok.*;
-import org.joda.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor

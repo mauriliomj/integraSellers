@@ -1,9 +1,10 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
-import com.mentoriatiago.integramarketplace.exceptions.NotFound;
+import com.mentoriatiago.integramarketplace.exceptions.NotFoundException;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import java.util.Optional;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -40,7 +40,7 @@ class GetSellerByIdTest {
         Mockito.when(sellerDataGateway.findById(mockSeller().getSellerId()))
                 .thenReturn(Optional.empty());
 
-        Assertions.assertThrows(NotFound.class, ()-> getSellerById
+        Assertions.assertThrows(NotFoundException.class, ()-> getSellerById
                 .getSeller(mockSeller().getSellerId()));
 
         Mockito.verify(sellerDataGateway).findById(mockSeller().getSellerId());

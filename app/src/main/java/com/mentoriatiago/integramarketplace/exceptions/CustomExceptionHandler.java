@@ -1,5 +1,6 @@
 package com.mentoriatiago.integramarketplace.exceptions;
 
+import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.ErrorResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,8 @@ public class CustomExceptionHandler{
 
     }
 
-    @ExceptionHandler(BadRequest.class)
-    public HttpEntity<ErrorResponse> handlerValidationException(final  BadRequest ex) {
+    @ExceptionHandler(BadRequestException.class)
+    public HttpEntity<ErrorResponse> handlerValidationException(final BadRequestException ex) {
 
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
@@ -45,8 +46,8 @@ public class CustomExceptionHandler{
 
     }
 
-    @ExceptionHandler(NotFound.class)
-    public HttpEntity<ErrorResponse> handlerValidationException(final  NotFound ex) {
+    @ExceptionHandler(NotFoundException.class)
+    public HttpEntity<ErrorResponse> handlerValidationException(final NotFoundException ex) {
 
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
@@ -57,8 +58,8 @@ public class CustomExceptionHandler{
 
     }
 
-    @ExceptionHandler(AlreadyRegistered.class)
-    public HttpEntity<ErrorResponse> handlerValidationException(final AlreadyRegistered ex) {
+    @ExceptionHandler(AlreadyRegisteredException.class)
+    public HttpEntity<ErrorResponse> handlerValidationException(final AlreadyRegisteredException ex) {
 
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
