@@ -10,12 +10,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactDocument {
+
   private ContactTypeEnum type;
   private String value;
 
   public ContactDocument(Contact contact) {
+
     this.type = contact.getType();
     this.value = contact.getValue();
+
   }
 
   public Contact toDomain() {

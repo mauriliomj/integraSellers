@@ -9,20 +9,20 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 
 @RestControllerAdvice
 public class CustomExceptionHandler{
 
     private static final String CONTENT_TYPE = "Content-Type";
-    private static final String APPLICATION_JSON_CHARSET_UTF_8 = "application/json; charset=utf-8";
+    private static final String APPLICATION_JSON_CHARSET_UTF_8 =
+            "application/json; charset=utf-8";
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public HttpEntity<ErrorResponse> handlerValidationException(final  MethodArgumentNotValidException ex) {
+    public HttpEntity<ErrorResponse>
+    handlerValidationException(final  MethodArgumentNotValidException ex) {
 
         final BindingResult bindingResult = ex.getBindingResult();
         final List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -35,6 +35,7 @@ public class CustomExceptionHandler{
 
     @ExceptionHandler(BadRequest.class)
     public HttpEntity<ErrorResponse> handlerValidationException(final  BadRequest ex) {
+
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
         final ErrorResponse response = new ErrorResponse(errors);
@@ -43,8 +44,10 @@ public class CustomExceptionHandler{
         return new ResponseEntity<>(response, responseHeaders, HttpStatus.BAD_REQUEST);
 
     }
+
     @ExceptionHandler(NotFound.class)
     public HttpEntity<ErrorResponse> handlerValidationException(final  NotFound ex) {
+
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
         final ErrorResponse response = new ErrorResponse(errors);
@@ -53,8 +56,10 @@ public class CustomExceptionHandler{
         return new ResponseEntity<>(response, responseHeaders, HttpStatus.NOT_FOUND);
 
     }
-    @ExceptionHandler(AlreadyRegisteredException.class)
-    public HttpEntity<ErrorResponse> handlerValidationException(final  AlreadyRegisteredException ex) {
+
+    @ExceptionHandler(AlreadyRegistered.class)
+    public HttpEntity<ErrorResponse> handlerValidationException(final AlreadyRegistered ex) {
+
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
         final ErrorResponse response = new ErrorResponse(errors);
@@ -65,8 +70,10 @@ public class CustomExceptionHandler{
     }
 
     private ErrorResponse processFieldErrors(final List<FieldError> fieldErrors) {
+
         final List<String> errors = fieldErrors.stream()
                 .map(error -> String.format("%s: %s", error.getField(), error.getDefaultMessage())).collect(toList());
         return new ErrorResponse(errors);
+
     }
 }

@@ -17,32 +17,45 @@ public class SellerDataGatewayMongoImpl implements SellerDataGateway {
 
   @Override
   public void save(Seller seller) {
+
     sellersRepository.save(new SellerDocument(seller));
+
   }
 
   @Override
   public Optional<Seller> findByRegistrationCode(String registrationCode) {
-    return sellersRepository.findByRegistrationCode(registrationCode).map(SellerDocument::toDomain);
+
+    return sellersRepository.findByRegistrationCode(registrationCode)
+            .map(SellerDocument::toDomain);
+
   }
 
   @Override
   public Optional<Seller> findById(String sellerId) {
+
     return sellersRepository.findById(sellerId).map(SellerDocument::toDomain);
+
   }
 
   @Override
   public Boolean sellerExists(String sellerId) {
+
     return sellersRepository.existsById(sellerId);
+
   }
 
   @Override
   public Page<Seller> findAll(PageRequest pageable) {
+
     return sellersRepository.findAll(pageable).map(SellerDocument::toDomain);
+
   }
 
   @Override
   public boolean existsById(String sellerId) {
+
     return sellersRepository.existsById(sellerId);
+
   }
 }
 

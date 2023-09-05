@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AddressDocument {
+
     private String street;
     private String number;
     private String zipcode;
@@ -15,15 +16,18 @@ public class AddressDocument {
     private String country;
 
     public AddressDocument(final Address address) {
+
         this.street = address.getStreet();
         this.number = address.getNumber();
         this.zipcode = address.getZipcode();
         this.city = address.getCity();
         this.state = address.getState();
         this.country = address.getCountry();
+
     }
 
     public Address toDomain() {
+
         Address address = new Address(street,number,zipcode,city,state,country);
         address.setStreet(this.street);
         address.setNumber(this.number);
@@ -31,6 +35,8 @@ public class AddressDocument {
         address.setCity(this.city);
         address.setState(this.state);
         address.setCountry(this.country);
+
         return address;
+
     }
 }

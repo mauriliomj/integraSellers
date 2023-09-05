@@ -1,12 +1,15 @@
 package com.mentoriatiago.integramarketplace.gateways.inputs.jsons;
 
 import com.mentoriatiago.integramarketplace.domains.Address;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressRequest {
+
     private String street;
     private String number;
     private String zipcode;
@@ -15,6 +18,7 @@ public class AddressRequest {
     private String country;
 
     public Address toDomain(){
+
         Address address = new Address();
         address.setStreet(street);
         address.setNumber(number);
@@ -24,5 +28,6 @@ public class AddressRequest {
         address.setCountry(country);
 
         return address;
+
     }
 }

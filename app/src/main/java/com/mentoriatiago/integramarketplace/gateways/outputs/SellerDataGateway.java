@@ -4,8 +4,8 @@ import com.mentoriatiago.integramarketplace.domains.Seller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
 import java.util.Optional;
+
 @Component
 public interface SellerDataGateway {
 
@@ -20,4 +20,5 @@ public interface SellerDataGateway {
   Page<Seller> findAll(PageRequest pageRequest);
 
   boolean existsById(String sellerId);
+
 }

@@ -18,6 +18,7 @@ public class SwaggerConfiguration {
 
     @Bean
     public Docket internal() {
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(BASE_PACKAGE))
@@ -25,13 +26,16 @@ public class SwaggerConfiguration {
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(getApiInfo());
+
     }
 
     private ApiInfo getApiInfo(){
+
         return new ApiInfoBuilder()
                 .title("Integrates marketplaces.")
                 .description("App de integração de marketplaces.")
                 .version("1")
                 .build();
+
     }
 }

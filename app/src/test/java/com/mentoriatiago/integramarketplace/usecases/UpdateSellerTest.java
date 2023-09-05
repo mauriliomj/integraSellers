@@ -1,63 +1,83 @@
 package com.mentoriatiago.integramarketplace.usecases;
 
 import com.mentoriatiago.integramarketplace.domains.Seller;
-import com.mentoriatiago.integramarketplace.domains.SellerId;
 import com.mentoriatiago.integramarketplace.exceptions.NotFound;
-import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.ContactRequest;
-import com.mentoriatiago.integramarketplace.gateways.inputs.jsons.SellerRequest;
 import com.mentoriatiago.integramarketplace.gateways.outputs.SellerDataGateway;
+import org.joda.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class UpdateSellerTest {
+
     @InjectMocks
     private UpdateSeller updateSeller;
     @Mock
     private SellerDataGateway sellerDataGateway;
+
     @Test
     public void deveEncontrarESalvarAlteracoesDeUmSellerPeloId(){
-        String sellerId = "test";
-        Seller seller = mock(Seller.class);
-        SellerRequest sellerRequest = new SellerRequest();
-        sellerRequest.setContact(new ContactRequest());
 
-        Mockito.when(sellerDataGateway.findById(sellerId))
+        Seller seller = mockSeller();
+        Seller modifiedSeller = mockSellerUpdated();
+
+        Mockito.when(sellerDataGateway.findById(seller.getSellerId()))
                 .thenReturn(Optional.of(seller));
 
-        Optional<Seller> optionalSeller = updateSeller
-                .updateSeller(sellerId,sellerRequest);
+        Seller sellerAfterModified = updateSeller.updateSeller(seller.getSellerId(),
+                modifiedSeller);
 
-        Assertions.assertTrue(optionalSeller.isPresent());
-        Assertions.assertEquals(seller, optionalSeller.get(),"sellers iguais");
-        Mockito.verify(sellerDataGateway).findById(sellerId);
-        Mockito.verify(sellerDataGateway).save(any(Seller.class));
+        Mockito.verify(sellerDataGateway).findById(seller.getSellerId());
+
+        Assertions.assertEquals(seller.getCreatedDate(), sellerAfterModified.getCreatedDate());
+        Assertions.assertNotEquals(seller.getLastModifiedDate(),
+                sellerAfterModified.getLastModifiedDate());
+        Assertions.assertEquals(seller.getRegistrationCode(),
+                sellerAfterModified.getRegistrationCode());
+        Assertions.assertNotEquals(seller.getName(),sellerAfterModified.getName());
+
      }
 
     @Test
     public void deveLancarNotFoundSeNaoEncontrarOSeller(){
-        String sellerId = "test";
-        SellerRequest sellerRequest = new SellerRequest();
-        sellerRequest.setContact(new ContactRequest());
 
-        Mockito.when(sellerDataGateway.findById(sellerId))
-                .thenReturn(Optional.empty());
+        Seller seller = mockSeller();
+        Seller modifiedSeller = mockSellerUpdated();
 
-        Assertions.assertThrows(NotFound.class,
-                ()->updateSeller.updateSeller(sellerId,sellerRequest),
-                "Deve Lancar exception NotFound!");
+        Mockito.when(sellerDataGateway.findById(any()))
+                .thenThrow(new NotFound("Seller não encontrado!"));
 
-        Mockito.verify(sellerDataGateway).findById(sellerId);
+        Assertions.assertThrows(NotFound.class, ()->updateSeller
+                .updateSeller(seller.getSellerId(), modifiedSeller));
+
+    }
+
+    public Seller mockSeller(){
+
+        Seller mockSeller = new Seller();
+        mockSeller.setSellerId("1693535770652_1");
+        mockSeller.setName("MCM Comercial Eletrica ME");
+        mockSeller.setRegistrationCode("17.562.451/0001-15");
+        mockSeller.setCreatedDate(LocalDateTime.now());
+        mockSeller.setLastModifiedDate(LocalDateTime.now());
+        return mockSeller;
+
+    }
+
+    public Seller mockSellerUpdated(){
+
+        Seller mockSellerUpdated = new Seller();
+        mockSellerUpdated.setSellerId("1693535770652_1");
+        mockSellerUpdated.setName("Supermercado Lopes");
+        mockSellerUpdated.setRegistrationCode("17.562.451/0001-15");
+        return mockSellerUpdated;
+
     }
 }
