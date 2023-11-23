@@ -7,5 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @EnableMongoAuditing
 @EnableMongoRepositories(basePackages = {
-        "com.mentoriatiago.integraSellers.gateways.outputs"})
-public class MongoConfiguration {}
+    "com.mentoriatiago.integraSellers.gateways.outputs"})
+public class MongoConfiguration {
+
+}

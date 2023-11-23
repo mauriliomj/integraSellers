@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class GetAllSellers {
 
-    private SellerDataGateway sellerDataGateway;
+  private SellerDataGateway sellerDataGateway;
 
-    public Page<Seller> getSellers(int pageNumber, int pageSize){
+  public Page<Seller> getSellers(int pageNumber, int pageSize) {
 
-        PageRequest pageable = PageRequest.of(pageNumber, pageSize);
+    PageRequest pageable = PageRequest.of(pageNumber, pageSize);
 
-        return sellerDataGateway.findAll(pageable);
+    return sellerDataGateway.findAll(pageable);
 
-    }
+  }
 }

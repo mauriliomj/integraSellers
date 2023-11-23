@@ -10,24 +10,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddressRequest {
 
-    private String street;
-    private String number;
-    private String zipcode;
-    private String city;
-    private String state;
-    private String country;
+  private String street;
+  private String number;
+  private String zipcode;
+  private String city;
+  private String state;
+  private String country;
 
-    public Address toDomain(){
+  public Address toDomain() {
 
-        Address address = new Address();
-        address.setStreet(street);
-        address.setNumber(number);
-        address.setZipcode(zipcode);
-        address.setCity(city);
-        address.setState(state);
-        address.setCountry(country);
+    Address address = new Address();
+    address.setStreet(street);
+    address.setNumber(number);
+    address.setZipcode(zipcode);
+    address.setCity(city);
+    address.setState(state);
+    address.setCountry(country);
 
-        return address;
+    return address;
 
-    }
+  }
 }

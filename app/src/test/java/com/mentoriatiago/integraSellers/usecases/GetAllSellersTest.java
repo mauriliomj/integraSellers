@@ -17,25 +17,25 @@ import org.springframework.data.domain.PageRequest;
 @ExtendWith(MockitoExtension.class)
 class GetAllSellersTest {
 
-    @InjectMocks
-    private GetAllSellers getAllSellers;
-    @Mock
-    private SellerDataGateway sellerDataGateway;
+  @InjectMocks
+  private GetAllSellers getAllSellers;
+  @Mock
+  private SellerDataGateway sellerDataGateway;
 
-    @Test
-    public void deveRetornarUmaPageSeller(){
+  @Test
+  public void deveRetornarUmaPageSeller() {
 
-        int pageNumber = 0;
-        int pageSize = 10;
-        Page<Seller> sellerPage = mock(Page.class);
+    int pageNumber = 0;
+    int pageSize = 10;
+    Page<Seller> sellerPage = mock(Page.class);
 
-        Mockito.when(sellerDataGateway.findAll(PageRequest.of(pageNumber,pageSize)))
-                .thenReturn(sellerPage);
-        getAllSellers.getSellers(pageNumber,pageSize);
+    Mockito.when(sellerDataGateway.findAll(PageRequest.of(pageNumber, pageSize)))
+        .thenReturn(sellerPage);
+    getAllSellers.getSellers(pageNumber, pageSize);
 
-        Mockito.verify(sellerDataGateway).findAll(PageRequest.of(pageNumber,pageSize));
-        Assertions.assertEquals(sellerPage, sellerDataGateway
-                .findAll(PageRequest.of(pageNumber,pageSize)));
+    Mockito.verify(sellerDataGateway).findAll(PageRequest.of(pageNumber, pageSize));
+    Assertions.assertEquals(sellerPage, sellerDataGateway
+        .findAll(PageRequest.of(pageNumber, pageSize)));
 
-    }
+  }
 }

@@ -11,22 +11,22 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class AddSeller {
 
-    private SellerDataGateway sellerDataGateway;
+  private SellerDataGateway sellerDataGateway;
 
-    public void execute(Seller seller) {
+  public void execute(Seller seller) {
 
-        if(sellerDataGateway.findByRegistrationCode(seller.getRegistrationCode()).isPresent()){
+    if (sellerDataGateway.findByRegistrationCode(seller.getRegistrationCode()).isPresent()) {
 
-            throw new AlreadyRegisteredException("Seller já registrado!");
+      throw new AlreadyRegisteredException("Seller já registrado!");
 
-        } else{
+    } else {
 
-            seller.setSellerId(new SellerId().selerId());
-            seller.setCreatedDate(LocalDateTime.now());
-            seller.setLastModifiedDate(LocalDateTime.now());
+      seller.setSellerId(new SellerId().selerId());
+      seller.setCreatedDate(LocalDateTime.now());
+      seller.setLastModifiedDate(LocalDateTime.now());
 
-            sellerDataGateway.save(seller);
+      sellerDataGateway.save(seller);
 
-        }
     }
+  }
 }

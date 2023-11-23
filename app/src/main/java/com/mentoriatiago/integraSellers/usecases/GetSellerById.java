@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class GetSellerById {
 
-    private SellerDataGateway sellerDataGateway;
+  private SellerDataGateway sellerDataGateway;
 
-    public Seller getSeller(String sellerId){
+  public Seller getSeller(String sellerId) {
 
-        return sellerDataGateway.findById(sellerId).orElseThrow(()->new
-            NotFoundException("ID não encontrado!"));
+    return sellerDataGateway.findById(sellerId).orElseThrow(() -> new
+        NotFoundException("ID não encontrado!"));
 
-    }
+  }
 }

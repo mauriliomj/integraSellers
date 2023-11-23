@@ -1,9 +1,9 @@
 package com.mentoriatiago.integraSellers.exceptions;
 
-public class AlreadyRegisteredException extends RuntimeException{
+public class AlreadyRegisteredException extends RuntimeException {
 
-    public AlreadyRegisteredException(String error){
-        super(error);
-    }
+  public AlreadyRegisteredException(String error) {
+    super(error);
+  }
 
 }

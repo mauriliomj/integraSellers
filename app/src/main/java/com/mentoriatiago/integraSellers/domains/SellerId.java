@@ -9,15 +9,15 @@ import java.util.concurrent.atomic.AtomicLong;
 @EqualsAndHashCode
 public class SellerId {
 
-    AtomicLong id = new AtomicLong();
+  AtomicLong id = new AtomicLong();
 
-    public String selerId(){
+  public String selerId() {
 
-        Date now = new Date();
-        long timestamp = now.getTime();
-        long userId = id.incrementAndGet();
-        String sellerId = timestamp+"_"+userId;
-        return sellerId;
+    Date now = new Date();
+    long timestamp = now.getTime();
+    long userId = id.incrementAndGet();
+    String sellerId = timestamp + "_" + userId;
+    return sellerId;
 
-    }
+  }
 }

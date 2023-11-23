@@ -12,25 +12,25 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UpdateSeller {
 
-    private SellerDataGateway sellerDataGateway;
+  private SellerDataGateway sellerDataGateway;
 
-    public Seller updateSeller(String sellerId, Seller updatedSeller){
+  public Seller updateSeller(String sellerId, Seller updatedSeller) {
 
-        Optional<Seller> existingSeller = sellerDataGateway.findById(sellerId);
+    Optional<Seller> existingSeller = sellerDataGateway.findById(sellerId);
 
-        if (existingSeller.isPresent()) {
+    if (existingSeller.isPresent()) {
 
-            updatedSeller.setCreatedDate(existingSeller.get().getCreatedDate());
-            updatedSeller.setLastModifiedDate(LocalDateTime.now());
+      updatedSeller.setCreatedDate(existingSeller.get().getCreatedDate());
+      updatedSeller.setLastModifiedDate(LocalDateTime.now());
 
-            sellerDataGateway.save(updatedSeller);
+      sellerDataGateway.save(updatedSeller);
 
-            return updatedSeller;
+      return updatedSeller;
 
-        } else {
+    } else {
 
-            throw new NotFoundException("Seller não encontrado!");
+      throw new NotFoundException("Seller não encontrado!");
 
-        }
     }
+  }
 }
