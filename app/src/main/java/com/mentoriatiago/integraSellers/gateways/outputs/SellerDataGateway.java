@@ -2,7 +2,7 @@ package com.mentoriatiago.integraSellers.gateways.outputs;
 
 import com.mentoriatiago.integraSellers.domains.Seller;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
 
@@ -15,10 +15,6 @@ public interface SellerDataGateway {
 
   Optional<Seller> findById(String sellerId);
 
-  Boolean sellerExists(String sellerId);
-
-  Page<Seller> findAll(PageRequest pageRequest);
-
-  boolean existsById(String sellerId);
+  Page<Seller> findAll(Pageable pageable);
 
 }

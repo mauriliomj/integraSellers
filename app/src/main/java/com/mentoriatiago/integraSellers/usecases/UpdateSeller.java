@@ -22,6 +22,7 @@ public class UpdateSeller {
 
       updatedSeller.setCreatedDate(existingSeller.get().getCreatedDate());
       updatedSeller.setLastModifiedDate(LocalDateTime.now());
+      updatedSeller.setSellerId(existingSeller.get().getSellerId());
 
       sellerDataGateway.save(updatedSeller);
 

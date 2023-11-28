@@ -6,7 +6,7 @@ import com.mentoriatiago.integraSellers.gateways.outputs.mongodb.repositories.Se
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -38,23 +38,9 @@ public class SellerDataGatewayMongoImpl implements SellerDataGateway {
   }
 
   @Override
-  public Boolean sellerExists(String sellerId) {
-
-    return sellersRepository.existsById(sellerId);
-
-  }
-
-  @Override
-  public Page<Seller> findAll(PageRequest pageable) {
+  public Page<Seller> findAll(Pageable pageable) {
 
     return sellersRepository.findAll(pageable).map(SellerDocument::toDomain);
-
-  }
-
-  @Override
-  public boolean existsById(String sellerId) {
-
-    return sellersRepository.existsById(sellerId);
 
   }
 }
