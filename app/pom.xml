@@ -27,7 +27,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>2.5.5</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -38,7 +37,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -54,18 +52,12 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 			<version>2.5.5</version>
 		</dependency>
-        <dependency>
-            <groupId>org.jspringbot</groupId>
-            <artifactId>jspringbot-date</artifactId>
-            <version>1.9</version>
-        </dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-			<version>3.0.5</version>
-		</dependency>
+    <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-date</artifactId>
+        <version>1.9</version>
+    </dependency>
     </dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -82,5 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

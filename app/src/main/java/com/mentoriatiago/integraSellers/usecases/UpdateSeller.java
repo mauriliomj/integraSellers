@@ -14,7 +14,7 @@ public class UpdateSeller {
 
   private SellerDataGateway sellerDataGateway;
 
-  public Seller updateSeller(String sellerId, Seller updatedSeller) {
+  public void updateSeller(String sellerId, Seller updatedSeller) {
 
     Optional<Seller> existingSeller = sellerDataGateway.findById(sellerId);
 
@@ -24,8 +24,6 @@ public class UpdateSeller {
       updatedSeller.setSellerId(existingSeller.get().getSellerId());
 
       sellerDataGateway.save(updatedSeller);
-
-      return updatedSeller;
 
     } else {
 

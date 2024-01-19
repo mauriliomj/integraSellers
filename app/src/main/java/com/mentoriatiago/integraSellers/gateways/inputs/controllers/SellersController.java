@@ -2,7 +2,6 @@ package com.mentoriatiago.integraSellers.gateways.inputs.controllers;
 
 import com.mentoriatiago.integraSellers.domains.*;
 import com.mentoriatiago.integraSellers.exceptions.NotFoundException;
-import com.mentoriatiago.integraSellers.gateways.inputs.SellersClient;
 import com.mentoriatiago.integraSellers.gateways.inputs.jsons.SellerRequest;
 import com.mentoriatiago.integraSellers.usecases.AddSeller;
 import com.mentoriatiago.integraSellers.usecases.GetAllSellers;
@@ -21,8 +20,6 @@ import javax.validation.constraints.NotNull;
 @RequestMapping(value = "/sellers")
 public class SellersController {
 
-  @Autowired
-  SellersClient sellersClient;
   @Autowired
   private AddSeller addSeller;
   @Autowired
@@ -53,17 +50,17 @@ public class SellersController {
 
   @PutMapping(value = "/{sellerId}")
   @ApiOperation("Atualiza/modifica os sellers cadastrados.")
-  public Seller updateSeller(@PathVariable String sellerId,
+  public void updateSeller(@PathVariable String sellerId,
       @RequestBody SellerRequest updatedSeller)
       throws NotFoundException {
 
-    return updateSeller.updateSeller(sellerId, updatedSeller.toDomain());
+    updateSeller.updateSeller(sellerId, updatedSeller.toDomain());
 
   }
 
   @GetMapping("/{sellerId}")
   @ApiOperation("Busca um Seller pelo Id.")
-  public Seller getSeller(String sellerId) {
+  public Seller getSeller(@PathVariable String sellerId) {
 
     return getSellerById.getSeller(sellerId);
 
