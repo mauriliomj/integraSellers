@@ -44,7 +44,7 @@ public class SellersController {
   public Page<Seller> getSellers(@RequestParam(defaultValue = "0") int pageNumber,
       @RequestParam(defaultValue = "10") int pageSize) {
 
-    return getAllSellers.getSellers(pageNumber, pageSize);
+    return getAllSellers.execute(pageNumber, pageSize);
 
   }
 
@@ -54,7 +54,7 @@ public class SellersController {
       @RequestBody SellerRequest updatedSeller)
       throws NotFoundException {
 
-    updateSeller.updateSeller(sellerId, updatedSeller.toDomain());
+    updateSeller.execute(sellerId, updatedSeller.toDomain());
 
   }
 
@@ -62,7 +62,7 @@ public class SellersController {
   @ApiOperation("Busca um Seller pelo Id.")
   public Seller getSeller(@PathVariable String sellerId) {
 
-    return getSellerById.getSeller(sellerId);
+    return getSellerById.execute(sellerId);
 
   }
 }

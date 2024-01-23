@@ -13,7 +13,7 @@ public class GetAllSellers {
 
   private SellerDataGateway sellerDataGateway;
 
-  public Page<Seller> getSellers(int pageNumber, int pageSize) {
+  public Page<Seller> execute(int pageNumber, int pageSize) {
 
     PageRequest pageable = PageRequest.of(pageNumber, pageSize);
 

@@ -31,7 +31,7 @@ class GetAllSellersTest {
 
     Mockito.when(sellerDataGateway.findAll(PageRequest.of(pageNumber, pageSize)))
         .thenReturn(sellerPage);
-    getAllSellers.getSellers(pageNumber, pageSize);
+    getAllSellers.execute(pageNumber, pageSize);
 
     Mockito.verify(sellerDataGateway).findAll(PageRequest.of(pageNumber, pageSize));
     Assertions.assertEquals(sellerPage, sellerDataGateway

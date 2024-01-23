@@ -14,21 +14,17 @@ public class UpdateSeller {
 
   private SellerDataGateway sellerDataGateway;
 
-  public void updateSeller(String sellerId, Seller updatedSeller) {
+  public void execute(String sellerId, Seller updatedSeller) {
 
     Optional<Seller> existingSeller = sellerDataGateway.findById(sellerId);
-
     if (existingSeller.isPresent()) {
 
       updatedSeller.setLastModifiedDate(LocalDateTime.now());
       updatedSeller.setSellerId(existingSeller.get().getSellerId());
-
       sellerDataGateway.save(updatedSeller);
 
     } else {
-
       throw new NotFoundException("Seller não encontrado!");
-
     }
   }
 }

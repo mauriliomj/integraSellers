@@ -12,7 +12,7 @@ public class GetSellerById {
 
   private SellerDataGateway sellerDataGateway;
 
-  public Seller getSeller(String sellerId) {
+  public Seller execute(String sellerId) {
 
     return sellerDataGateway.findById(sellerId).orElseThrow(() -> new
         NotFoundException("ID não encontrado!"));
