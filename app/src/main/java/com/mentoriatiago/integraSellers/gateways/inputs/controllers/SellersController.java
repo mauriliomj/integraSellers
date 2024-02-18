@@ -36,7 +36,6 @@ public class SellersController {
   public void addSellers(@RequestBody SellerRequest sellerRequest) {
 
     addSeller.execute(sellerRequest.toDomain());
-
   }
 
   @GetMapping
@@ -45,7 +44,6 @@ public class SellersController {
       @RequestParam(defaultValue = "10") int pageSize) {
 
     return getAllSellers.execute(pageNumber, pageSize);
-
   }
 
   @PutMapping(value = "/{sellerId}")
@@ -55,7 +53,6 @@ public class SellersController {
       throws NotFoundException {
 
     updateSeller.execute(sellerId, updatedSeller.toDomain());
-
   }
 
   @GetMapping("/{sellerId}")
@@ -63,6 +60,5 @@ public class SellersController {
   public Seller getSeller(@PathVariable String sellerId) {
 
     return getSellerById.execute(sellerId);
-
   }
 }

@@ -1,9 +1,13 @@
 server:
-  port:
-    8080
+  port: 8080
 spring:
+  kafka:
+    bootstrap-servers: PLAINTEXT://localhost:9092
   application:
     name: Sellers
   data:
     mongodb:
       uri: mongodb://localhost:27017/sellers
+integra-sellers:
+  seller:
+    broadcast: "integra-sellers.seller.broadcast"
