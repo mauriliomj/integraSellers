@@ -4,6 +4,8 @@ import com.mentoriatiago.integraSellers.domains.*;
 import com.mentoriatiago.integraSellers.exceptions.AlreadyRegisteredException;
 import com.mentoriatiago.integraSellers.gateways.outputs.SellerDataGateway;
 import com.mentoriatiago.integraSellers.gateways.outputs.kafka.SellerService;
+import com.mentoriatiago.integraSellers.gateways.outputs.kafka.resources.AddressResource;
+import com.mentoriatiago.integraSellers.gateways.outputs.kafka.resources.ContactResource;
 import com.mentoriatiago.integraSellers.gateways.outputs.kafka.resources.SellerResource;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,8 @@ public class AddSeller {
       sellerResource.setSellerId(seller.getSellerId());
       sellerResource.setName(seller.getName());
       sellerResource.setRegistrationCode(seller.getRegistrationCode());
-      sellerResource.setContact(seller.getContact().toString());
-      sellerResource.setAddress(seller.getAddress().toString());
+      sellerResource.setContact(new ContactResource(seller.getContact()));
+      sellerResource.setAddress(new AddressResource(seller.getAddress()));
       sellerResource.setCreatedDate(seller.getCreatedDate().toString());
       sellerResource.setLastModifiedDate(seller.getLastModifiedDate().toString());
 

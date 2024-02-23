@@ -1,5 +1,6 @@
 package com.mentoriatiago.integraSellers.configurations;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +10,10 @@ public class JacksonConfiguration {
 
   @Bean
   public ObjectMapper objectMapper() {
-    return new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.registerModule(new JavaTimeModule());
+
+    return objectMapper;
   }
 }
 
