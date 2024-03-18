@@ -1,6 +1,5 @@
 package com.mentoriatiago.integraSellers.configurations;
 
-import com.mentoriatiago.integraSellers.gateways.outputs.kafka.resources.SellerResource;
 import java.util.Map;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;

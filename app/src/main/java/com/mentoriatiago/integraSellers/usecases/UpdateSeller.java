@@ -20,6 +20,7 @@ public class UpdateSeller {
     if (existingSeller.isPresent()) {
 
       updatedSeller.setLastModifiedDate(LocalDateTime.now());
+      updatedSeller.setCreatedDate(existingSeller.get().getCreatedDate());
       updatedSeller.setSellerId(existingSeller.get().getSellerId());
       sellerDataGateway.save(updatedSeller);
 

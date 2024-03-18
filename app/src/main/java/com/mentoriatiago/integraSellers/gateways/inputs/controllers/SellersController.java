@@ -57,7 +57,7 @@ public class SellersController {
 
   @GetMapping("/{sellerId}")
   @ApiOperation("Busca um Seller pelo Id.")
-  public Seller getSeller(@PathVariable String sellerId) {
+  public Seller getSellerById(@PathVariable String sellerId) {
 
     return getSellerById.execute(sellerId);
   }

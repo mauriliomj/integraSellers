@@ -7,12 +7,13 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,53 +23,50 @@ class UpdateSellerTest {
   private UpdateSeller updateSeller;
   @Mock
   private SellerDataGateway sellerDataGateway;
+  @Captor
+  private ArgumentCaptor<Seller> sellerArgumentCaptor;
 
   @Test
-  public void deveEncontrarESalvarAlteracoesDeUmSellerPeloId() {
+  public void shouldFindAndSaveChangesOfSellerById() {
+    Mockito.when(sellerDataGateway.findById(mockSeller().getSellerId()))
+        .thenReturn(Optional.of(mockSeller()));
+    updateSeller.execute(mockSeller().getSellerId(), mockSeller());
 
-    Seller seller = mockSeller();
-    Seller modifiedSeller = mockSellerUpdated();
+    Mockito.verify(sellerDataGateway).findById(mockSeller().getSellerId());
+    Mockito.verify(sellerDataGateway).save(sellerArgumentCaptor.capture());
 
-    Mockito.when(sellerDataGateway.findById(seller.getSellerId()))
-        .thenReturn(Optional.of(seller));
+    Seller capturedSeller = sellerArgumentCaptor.getValue();
+    Assertions.assertEquals(mockSeller().getSellerId(), capturedSeller.getSellerId());
+    Assertions.assertEquals(mockSeller().getName(), capturedSeller.getName());
+    Assertions.assertEquals(mockSeller().getContact(), capturedSeller.getContact());
+    Assertions.assertEquals(mockSeller().getAddress(), capturedSeller.getAddress());
+    Assertions.assertEquals(mockSeller().getRegistrationCode(), capturedSeller
+        .getRegistrationCode());
 
-    Mockito.verify(sellerDataGateway).findById(seller.getSellerId());
+    //conferir divergencia de datas com o Tiago...
 
+    Assertions.assertNotEquals(mockSeller().getCreatedDate(), capturedSeller.getCreatedDate());
+    Assertions.assertNotEquals(mockSeller().getLastModifiedDate(), capturedSeller
+        .getLastModifiedDate());
   }
 
   @Test
-  public void deveLancarNotFoundSeNaoEncontrarOSeller() {
-
-    Seller seller = mockSeller();
-    Seller modifiedSeller = mockSellerUpdated();
-
+  public void shouldThrowNotFoundException() {
     Mockito.when(sellerDataGateway.findById(any()))
         .thenThrow(new NotFoundException("Seller não encontrado!"));
 
     Assertions.assertThrows(NotFoundException.class, () -> updateSeller
-        .updateSeller(seller.getSellerId(), modifiedSeller));
-
+        .execute(mockSeller().getSellerId(), mockSeller()));
   }
 
   public Seller mockSeller() {
-
     Seller mockSeller = new Seller();
     mockSeller.setSellerId("1693535770652_1");
     mockSeller.setName("MCM Comercial Eletrica ME");
     mockSeller.setRegistrationCode("17.562.451/0001-15");
     mockSeller.setCreatedDate(LocalDateTime.now());
     mockSeller.setLastModifiedDate(LocalDateTime.now());
+
     return mockSeller;
-
-  }
-
-  public Seller mockSellerUpdated() {
-
-    Seller mockSellerUpdated = new Seller();
-    mockSellerUpdated.setSellerId("1693535770652_1");
-    mockSellerUpdated.setName("Supermercado Lopes");
-    mockSellerUpdated.setRegistrationCode("17.562.451/0001-15");
-    return mockSellerUpdated;
-
   }
 }

@@ -1,7 +1,6 @@
 package com.mentoriatiago.integraSellers.usecases;
 
 import static org.mockito.Mockito.mock;
-
 import com.mentoriatiago.integraSellers.domains.Seller;
 import com.mentoriatiago.integraSellers.gateways.outputs.SellerDataGateway;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +22,7 @@ class GetAllSellersTest {
   private SellerDataGateway sellerDataGateway;
 
   @Test
-  public void deveRetornarUmaPageSeller() {
+  public void shouldReturnAnPageSellers() {
 
     int pageNumber = 0;
     int pageSize = 10;

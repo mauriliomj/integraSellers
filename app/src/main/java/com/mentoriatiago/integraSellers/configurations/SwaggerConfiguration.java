@@ -1,5 +1,7 @@
 package com.mentoriatiago.integraSellers.configurations;
 
+import org.ff4j.core.FeatureStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,7 +16,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-  private static final String BASE_PACKAGE = "com.mentoriatiago.integraSellers.gateways.inputs.controllers";
+  private static final String BASE_PACKAGE =
+      "com.mentoriatiago.integraSellers.gateways.inputs.controllers";
+
+  @Autowired
+  private FeatureStore featureStore;
 
   @Bean
   public Docket internal() {

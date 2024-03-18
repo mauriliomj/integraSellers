@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SellerProducer {
-  @Autowired
+  @Autowired//testar sem autowired
   @Value("${integra-sellers.seller.broadcast}")
-  private String seller_topic;
+  private String sellerTopic;
   @Autowired
   private ObjectMapper objectMapper;
   @Autowired
@@ -20,6 +20,6 @@ public class SellerProducer {
 
   public void sendMessage(SellerResource sellerResource) throws IOException {
     String content = objectMapper.writeValueAsString(sellerResource);
-    kafkaTemplate.send(seller_topic, content);
+    kafkaTemplate.send(sellerTopic, content);
   }
 }

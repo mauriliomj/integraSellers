@@ -13,6 +13,8 @@ public class GetSellerById {
   private SellerDataGateway sellerDataGateway;
 
   public Seller execute(String sellerId) {
+    //Apagar após os testes!
+    System.out.println("consulta http sendo realizada!");
 
     return sellerDataGateway.findById(sellerId).orElseThrow(() -> new
         NotFoundException("ID não encontrado!"));

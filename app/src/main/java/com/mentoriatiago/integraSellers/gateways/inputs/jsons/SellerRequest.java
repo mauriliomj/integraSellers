@@ -3,7 +3,6 @@ package com.mentoriatiago.integraSellers.gateways.inputs.jsons;
 import com.mentoriatiago.integraSellers.domains.Seller;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-
 import static java.util.Optional.ofNullable;
 
 @Data

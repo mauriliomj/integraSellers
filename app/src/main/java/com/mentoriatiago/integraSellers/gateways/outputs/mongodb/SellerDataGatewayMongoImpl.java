@@ -1,4 +1,5 @@
 package com.mentoriatiago.integraSellers.gateways.outputs.mongodb;
+
 import com.mentoriatiago.integraSellers.domains.Seller;
 import com.mentoriatiago.integraSellers.gateways.outputs.SellerDataGateway;
 import com.mentoriatiago.integraSellers.gateways.outputs.mongodb.documents.SellerDocument;

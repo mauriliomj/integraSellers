@@ -23,25 +23,25 @@ class GetSellerByIdTest {
   private SellerDataGateway sellerDataGateway;
 
   @Test
-  public void deveriaEncontrarUmSellerPeloId() {
+  public void shouldFindSellerById() {
 
     Mockito.when(sellerDataGateway.findById(mockSeller().getSellerId()))
         .thenReturn(Optional.of(mockSeller()));
 
-    getSellerById.getSeller(mockSeller().getSellerId());
+    getSellerById.execute(mockSeller().getSellerId());
 
     Mockito.verify(sellerDataGateway).findById(mockSeller().getSellerId());
 
   }
 
   @Test
-  public void deveLancarExceptionSeNaoEncontrarUmSeller() {
+  public void shouldThrowNotFoundException() {
 
     Mockito.when(sellerDataGateway.findById(mockSeller().getSellerId()))
         .thenReturn(Optional.empty());
 
     Assertions.assertThrows(NotFoundException.class, () -> getSellerById
-        .getSeller(mockSeller().getSellerId()));
+        .execute(mockSeller().getSellerId()));
 
     Mockito.verify(sellerDataGateway).findById(mockSeller().getSellerId());
 
